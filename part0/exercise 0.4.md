@@ -23,7 +23,9 @@ Note right of browser: After entering data in the text field and clicking the sa
 
 browser ->>server: POST https://fullstack-exampleapp.herokuapp.com/My_Note
 activate server
-server-->>browser: Something
+server-->>browser: {
+        "content": "My_Note",
+        "date": "2023-12-06T22:24:09.757Z"}
 deactivate server
 
 ```
