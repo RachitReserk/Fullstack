@@ -21,4 +21,10 @@ deactivate server
 
 Note right of browser: After entering data in the text field and clicking the save button.
 
+
+browser ->>server : POST https://fullstack-exampleapp.herokuapp.com/My_Note
+activate server
+server-->>browser:
+deactivate server
+
 ```
