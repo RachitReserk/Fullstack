@@ -24,4 +24,9 @@ sequenceDiagram
     server-->>browser: the data file
     deactivate server
 
+browser ->>server: POST https://fullstack-exampleapp.herokuapp.com/My_NoteSPA
+activate server
+server-->>browser: {"content": "My_Note","date": "2023-12-06T22:24:09.757Z"}
+deactivate server
+
 ```
