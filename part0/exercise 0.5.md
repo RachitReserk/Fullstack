@@ -1,4 +1,4 @@
-``mermaid
+```mermaid
 sequenceDiagram
     participant browser
     participant server
@@ -18,4 +18,4 @@ sequenceDiagram
     server-->>browser: the JavaScript file
     deactivate server
 
-``
+```
