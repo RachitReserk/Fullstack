@@ -1,0 +1,9 @@
+import React from 'react'
+
+function Button({onSmash,text}) {
+  return (
+    <button onClick={onSmash}>{text}</button>
+  )
+}
+
+export default Button
