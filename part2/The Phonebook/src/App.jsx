@@ -1,20 +1,33 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import './App.css'
 import Filter from './Components/Filter'
 import Form from './Components/Form'
 import Persons from './Components/Persons'
+import axios from 'axios'
 
 function App() {
 
-  const [persons,setPersons] = useState([{ name: 'Rachit Tiwari', phno: 7905575833 ,id:0}])
+  const [persons,setPersons] = useState([])
   const [newName , setNewName] = useState('')
   const [newNumber , setNewNumber] = useState('')
   const [newFilter , setNewFilter] = useState('')
   const [showFilter , setShow] = useState(true)
   
+  useEffect(() => {
+    axios
+    .get('http://localhost:3001/persons')
+    .then(response => {
+      setPersons(response.data)
+    })
+  } , [])
+
+
+
   const NameToShow = showFilter ? persons : persons.filter((nameobj) => 
   {
-    if(nameobj.name.toUpperCase() == newFilter.toUpperCase())
+    if(newFilter==='')
+    return nameobj
+    else if(nameobj.name.toUpperCase() == newFilter.toUpperCase())
     return nameobj
   })
    
