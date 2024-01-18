@@ -5,6 +5,7 @@ import Form from './Components/Form'
 import Persons from './Components/Persons'
 import axios from 'axios'
 import noteService from './services/note'
+import Notification from './Components/Notification'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
   const [newNumber , setNewNumber] = useState('')
   const [newFilter , setNewFilter] = useState('')
   const [showFilter , setShow] = useState(true)
+  const [errorMessage, setErrorMessage] = useState(null)
   
   useEffect(() => {
     noteService.getAll().then(response =>
@@ -58,6 +60,12 @@ function App() {
       setPersons(persons.concat(response.data))
       setNewName('')
       setNewNumber('')
+      setErrorMessage('Number Added')
+      setTimeout( () => setErrorMessage(null) , 3000)
+      })
+      .catch(error => {
+        setErrorMessage('Fail')
+      setTimeout( () => setErrorMessage(null) , 3000)
       })
     /* setPersons(persons.concat(NameObject))
     setNewName('')
@@ -71,7 +79,12 @@ function App() {
        .update(flagid,NameObject)
        .then(reponse =>
         {
-          alert("UPDATED")
+          setErrorMessage('Number Updated')
+          setTimeout( () => setErrorMessage(null) , 3000)
+        })
+        .catch(error => {
+          setErrorMessage(`${NameObject.name} is deleted from the server`)
+        setTimeout( () => setErrorMessage(null) , 3000)
         })
       }
       /* alert(`${newName} is already added to phonebook`)
@@ -111,6 +124,7 @@ function App() {
   return (
     <>
     <h2>Phonebook</h2>
+    <Notification message={errorMessage}></Notification>
     <Filter newFilter={newFilter} handleFilterChange={handleFilterChange} setShow={setShow}></Filter>
     <Form addName={addName} newName={newName} handleChange={handleChange} newNumber={newNumber} handleNumberChange={handleNumberChange}></Form>
     <h2>Numbers</h2>
