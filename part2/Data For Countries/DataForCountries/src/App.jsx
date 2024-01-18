@@ -1,34 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState , useEffect } from 'react'
+import axios from 'axios'
 
-function App() {
-  const [count, setCount] = useState(0)
+function App() 
+{
+
+const [data, setData] = useState('')
+const [value , setValue] = useState('')
+const [capital , setCapital] =useState([])
+const [flag , setFlag] = useState('')
+
+useEffect( () => 
+{
+axios
+.get(`https://studies.cs.helsinki.fi/restcountries/api/name/${data}`)
+.then(response => {
+  console.log(response.data)
+  setCapital(response.data.capital.map(val => val))
+  setFlag(response.data.flags.png)
+})
+},[data])
+
+const handleChange = (event) =>
+{
+  setValue(event.target.value)
+  axios
+  .get('https://studies.cs.helsinki.fi/restcountries/api/all')
+  .then(response => 
+  {
+   const test = (response.data.map( val => 
+    {
+      if(val.name.common == event.target.value)
+      {
+        setData(val.name.common)
+      }
+    }
+    ))
+  }
+  )
+}
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='content'>
+      <h1>Find Countries: <input value={value} onChange={handleChange}></input></h1>
+        <h3>{capital.map(val => val)}</h3>
+        <h3><img src={flag}></img></h3>
+      
+    </div>
   )
 }
 
