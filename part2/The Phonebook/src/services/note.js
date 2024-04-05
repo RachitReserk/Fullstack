@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = 'http://localhost:3001/persons'
+const baseUrl = '/api/persons'
 
 const getAll = () =>
 {
@@ -13,6 +13,8 @@ const create = (newObject) =>
 
 const update = (id , newObject) =>
 {
+    console.log(newObject)
+    console.log(id)
    return axios.put(`${baseUrl}/${id}` , newObject)    
 }
 

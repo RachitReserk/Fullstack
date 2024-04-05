@@ -21,7 +21,7 @@ function App() {
       {
         setPersons(response.data)
       })
-  } , [persons])
+  } , [])
 
 
 
@@ -83,6 +83,7 @@ function App() {
           setTimeout( () => setErrorMessage(null) , 3000)
         })
         .catch(error => {
+          console.log(error)
           setErrorMessage(`${NameObject.name} is deleted from the server`)
         setTimeout( () => setErrorMessage(null) , 3000)
         })

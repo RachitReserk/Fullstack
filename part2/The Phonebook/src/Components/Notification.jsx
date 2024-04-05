@@ -7,7 +7,7 @@ function Notification({message}) {
   }
 
   return (
-    <div className='error'>
+    <div className='far fa-check-circle color'>
       {message}
     </div>
   )
